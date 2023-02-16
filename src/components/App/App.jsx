@@ -23,12 +23,22 @@ function App() {
       .catch((err) => console.log("Error in client GET:", err));
   };
 
+  // Client PUT for updating likes
+  const updateLikes = (id) => {
+    axios
+      .put(`/gallery/like/${id}`)
+      .then(() => {
+        getGallery();
+      })
+      .catch((err) => console.log("Error in client PUT:", err));
+  };
+
   return (
     <div className="App">
       <header className="App-header">
         <h1 className="App-title">Gallery of My Life</h1>
       </header>
-      <GalleryList galleryList={galleryList} />
+      <GalleryList galleryList={galleryList} updateLikes={updateLikes} />
     </div>
   );
 }
