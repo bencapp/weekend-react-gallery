@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import GalleryList from "../GalleryList/GalleryList";
+import GalleryForm from "../GalleryForm/GalleryForm";
 
 import "./App.css";
 
@@ -33,11 +34,24 @@ function App() {
       .catch((err) => console.log("Error in client PUT:", err));
   };
 
+  //Client POST for adding a new image
+  const addImage = (image, callback) => {
+    axios
+      .post("/gallery", { path: image.path, description: image.description })
+      .then(() => {
+        getGallery();
+        // callback function to clear the input fields after submit
+        callback();
+      })
+      .catch((err) => console.log("Error in client POST:", err));
+  };
+
   return (
     <div className="App">
       <header className="App-header">
         <h1 className="App-title">Gallery of My Life</h1>
       </header>
+      <GalleryForm addImage={addImage} />
       <GalleryList galleryList={galleryList} updateLikes={updateLikes} />
     </div>
   );
