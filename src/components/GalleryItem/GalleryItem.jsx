@@ -15,7 +15,6 @@ function GalleryItem({ item, updateLikes }) {
         className="img-container"
         onClick={() => {
           setDescriptionToggle(!descriptionVisible);
-          console.log("toggled description, it is now:", descriptionVisible);
         }}
       >
         {descriptionVisible ? (
