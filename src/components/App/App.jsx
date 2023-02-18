@@ -24,9 +24,9 @@ function App() {
   };
 
   // Client PUT for updating likes
-  const updateLikes = (id) => {
+  const updateLikes = (id, currentLikes) => {
     axios
-      .put(`/gallery/like/${id}`)
+      .put(`/gallery/like/${id}`, { currentLikes })
       .then(() => {
         getGallery();
       })
