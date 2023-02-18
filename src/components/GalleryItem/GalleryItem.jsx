@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import "./GalleryItem.css";
 
-function GalleryItem({ item, updateLikes }) {
+function GalleryItem({ item, updateLikes, deleteImage }) {
   const [descriptionVisible, setDescriptionToggle] = useState([]);
 
   useEffect(() => {
@@ -24,6 +24,7 @@ function GalleryItem({ item, updateLikes }) {
         )}
       </div>
       <button onClick={() => updateLikes(item.id, item.likes)}>Love It!</button>
+      <button onClick={() => deleteImage(item)}>Delete</button>
       <p>{item.likes} people love this!</p>
     </div>
   );
