@@ -3,7 +3,20 @@ const router = express.Router();
 // const galleryItems = require('../modules/gallery.data');
 const pool = require("../modules/pool.js");
 // POST Route
-router.post("/", (req, res) => {});
+router.post("/", (req, res) => {
+  const sqlText = `INSERT INTO gallery ("path", "description")
+                  VALUES ($1, $2)`;
+  const sqlParams = [req.body.path, req.body.description];
+
+  pool
+    .query(sqlText, sqlParams)
+    .then(() => {
+      res.sendStatus(204);
+    })
+    .catch((err) => {
+      console.log("Error executing SQL query:", sqlText, ":", err);
+    });
+});
 
 // PUT Route
 router.put("/like/:id", (req, res) => {
