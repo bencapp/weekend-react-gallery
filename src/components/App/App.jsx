@@ -46,13 +46,26 @@ function App() {
       .catch((err) => console.log("Error in client POST:", err));
   };
 
+  const deleteImage = (image) => {
+    axios
+      .delete(`/gallery/${image.id}`)
+      .then(() => {
+        getGallery();
+      })
+      .catch((err) => console.log("Error in client GET:", err));
+  };
+
   return (
     <div className="App">
       <header className="App-header">
         <h1 className="App-title">Gallery of My Life</h1>
       </header>
       <GalleryForm addImage={addImage} />
-      <GalleryList galleryList={galleryList} updateLikes={updateLikes} />
+      <GalleryList
+        galleryList={galleryList}
+        updateLikes={updateLikes}
+        deleteImage={deleteImage}
+      />
     </div>
   );
 }

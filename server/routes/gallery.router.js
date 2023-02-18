@@ -51,4 +51,20 @@ router.get("/", (req, res) => {
 });
 // END GET Route
 
+// DELETE route
+router.delete("/:id", (req, res) => {
+  const sqlText = "DELETE FROM gallery WHERE id = $1";
+  const sqlParams = [req.params.id];
+
+  pool
+    .query(sqlText, sqlParams)
+    .then(() => {
+      res.sendStatus(204);
+    })
+    .catch((err) => {
+      console.log("Error executing SQL query:", sqlText, ":", err);
+      res.sendStatus(500);
+    });
+});
+
 module.exports = router;
