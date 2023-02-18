@@ -23,7 +23,7 @@ function GalleryItem({ item, updateLikes }) {
           <img src={item.path} alt={item.description} />
         )}
       </div>
-      <button onClick={() => updateLikes(item.id)}>Love It!</button>
+      <button onClick={() => updateLikes(item.id, item.likes)}>Love It!</button>
       <p>{item.likes} people love this!</p>
     </div>
   );

@@ -7,14 +7,19 @@ router.post("/", (req, res) => {});
 
 // PUT Route
 router.put("/like/:id", (req, res) => {
-  console.log(req.params);
-  const galleryId = req.params.id;
-  for (const galleryItem of galleryItems) {
-    if (galleryItem.id == galleryId) {
-      galleryItem.likes += 1;
-    }
-  }
-  res.sendStatus(200);
+  const sqlText = `UPDATE gallery SET likes = $1 WHERE id = $2`;
+
+  // get current number of likes from client
+  const sqlParams = [req.body.currentLikes + 1, req.params.id];
+
+  pool
+    .query(sqlText, sqlParams)
+    .then(() => {
+      res.sendStatus(204);
+    })
+    .catch((err) => {
+      console.log("Error executing SQL query:", sqlText, ":", err);
+    });
 }); // END PUT Route
 
 // GET Route
@@ -27,7 +32,7 @@ router.get("/", (req, res) => {
       res.send(dbRes.rows);
     })
     .catch((err) => {
-      console.log("Error executing SQL query:", sqlText);
+      console.log("Error executing SQL query:", sqlText, ":", err);
       res.sendStatus(500);
     });
 });
