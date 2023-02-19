@@ -1,4 +1,32 @@
+.list-item-container {
+  width: 175px;
+  height: 250px;
+  margin: 20px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 5px;
+  background-color: rgb(221, 221, 221);
+}
+
 img {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
+}
+
+.img-container {
+  width: 150px;
+  height: 150px;
+  border: 1px solid grey;
+}
+
+.item-description {
+  margin: 0px;
+  padding: 10px;
+}
+
+p {
+  margin: 0px;
 }

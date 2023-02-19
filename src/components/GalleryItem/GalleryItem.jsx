@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import React from "react";
+import { Button } from "@material-ui/core";
 
 import "./GalleryItem.css";
 
@@ -10,7 +12,7 @@ function GalleryItem({ item, updateLikes, deleteImage }) {
   }, []);
 
   return (
-    <div>
+    <div className="list-item-container">
       <div
         className="img-container"
         onClick={() => {
@@ -18,13 +20,23 @@ function GalleryItem({ item, updateLikes, deleteImage }) {
         }}
       >
         {descriptionVisible ? (
-          <p>{item.description}</p>
+          <p className="item-description">{item.description}</p>
         ) : (
           <img src={item.path} alt={item.description} />
         )}
       </div>
-      <button onClick={() => updateLikes(item.id, item.likes)}>Love It!</button>
-      <button onClick={() => deleteImage(item)}>Delete</button>
+      <div>
+        <Button
+          size="small"
+          color="success"
+          onClick={() => updateLikes(item.id, item.likes)}
+        >
+          Love It!
+        </Button>
+        <Button size="small" onClick={() => deleteImage(item)}>
+          Delete
+        </Button>
+      </div>
       <p>{item.likes} people love this!</p>
     </div>
   );
